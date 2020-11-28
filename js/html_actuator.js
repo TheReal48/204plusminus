@@ -85,8 +85,10 @@ HTMLActuator.prototype.addTile = function (tile) {
     classes = ["tile", "tile-" + 4, positionClass];
   if (tile.value < 4)
     classes = ["tile", "tile-" + 2, positionClass];
-  if (tile.value < 2)
-    classes = ["tile", "tile-" + 2, positionClass];
+  if (tile.value < 1)
+    classes = ["tile", "tile-" + 0, positionClass];
+  if (tile.value < 0)
+    classes = ["tile", "tile-" + -1, positionClass];
 
   this.applyClasses(wrapper, classes);
 
