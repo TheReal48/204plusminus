@@ -57,13 +57,42 @@ HTMLActuator.prototype.addTile = function (tile) {
   // We can't use classlist because it somehow glitches when replacing classes
   var classes = ["tile", "tile-" + tile.value, positionClass];
 
-  if (tile.value > 2048) classes.push("tile-super");
+  if (tile.value > 16383)
+    classes = ["tile", "tile-" + 16384, positionClass];
+  if (tile.value < 16384)
+    classes = ["tile", "tile-" + 8192, positionClass];
+  if (tile.value < 8192)
+    classes = ["tile", "tile-" + 4096, positionClass];
+  if (tile.value < 4096)
+    classes = ["tile", "tile-" + 2048, positionClass];
+  if (tile.value < 2048)
+    classes = ["tile", "tile-" + 1024, positionClass];
+  if (tile.value < 1024)
+    classes = ["tile", "tile-" + 512, positionClass];
+  if (tile.value < 512)
+    classes = ["tile", "tile-" + 256, positionClass];
+  if (tile.value < 256)
+    classes = ["tile", "tile-" + 128, positionClass];
+  if (tile.value < 128)
+    classes = ["tile", "tile-" + 64, positionClass];
+  if (tile.value < 64)
+    classes = ["tile", "tile-" + 32, positionClass];
+  if (tile.value < 32)
+    classes = ["tile", "tile-" + 16, positionClass];
+  if (tile.value < 16)
+    classes = ["tile", "tile-" + 8, positionClass];
+  if (tile.value < 8)
+    classes = ["tile", "tile-" + 4, positionClass];
+  if (tile.value < 4)
+    classes = ["tile", "tile-" + 2, positionClass];
+  if (tile.value < 2)
+    classes = ["tile", "tile-" + 2, positionClass];
 
   this.applyClasses(wrapper, classes);
 
   inner.classList.add("tile-inner");
-  inner.textContent = tile.value >= 1 ? tile.value : tile.value != 0 ? "1" + "/" + 1/tile.value : "÷";
-  if(tile.value < 1 && tile.value != 0) inner.style.fontSize = "15px";
+  inner.textContent = tile.value >= 1 ? tile.value : tile.value > 0 ? "1" + "/" + 1/tile.value : tile.value == 0 ? "-" : "+";
+  if(tile.value < 1 && tile.value > 0) inner.style.fontSize = "15px";
 
   if (tile.previousPosition) {
     // Make sure that the tile gets rendered in the previous position first
